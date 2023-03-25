@@ -1,6 +1,7 @@
 package com.example.quizgame.ui
 
 import android.app.Activity
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -93,8 +95,7 @@ fun GameStatus(questionCount: Int, score: Int, modifier: Modifier = Modifier) {
 @Composable
 fun GameLayout(
     currentQuestion: String,
-    currentAnswer:String,
-    onKeyboardDone: () -> Unit,
+    currentAnswer:String
     modifier: Modifier = Modifier,
     gameViewModel: GameViewModel
 ) {
@@ -123,7 +124,7 @@ fun GameLayout(
             }
         }
         radioOptions.shuffle()
-        var selectedItem by remember { mutableStateOf(radioOptions[0]) }
+        var selectedItem by remember { mutableStateOf(null) }
 
         Column(modifier = Modifier.selectableGroup()) {
 
@@ -134,7 +135,8 @@ fun GameLayout(
                         .height(56.dp)
                         .selectable(
                             selected = (selectedItem == label),
-                            onClick = { gameViewModel.checkUserGuess(label) },
+                            onClick = {
+                                gameViewModel.checkUserGuess(label) },
                             role = Role.RadioButton
                         )
                         .padding(horizontal = 16.dp),
@@ -183,9 +185,17 @@ private fun FinalScoreDialog(
     )
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
-fun GameScreenPreview() {
+fun LightThemePreview() {
+    QuizGameTheme {
+        GameScreen()
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0x757575)
+@Composable
+fun DarkThemePreview() {
     QuizGameTheme {
         GameScreen()
     }
