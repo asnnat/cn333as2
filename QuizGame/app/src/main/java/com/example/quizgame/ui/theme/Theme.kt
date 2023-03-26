@@ -24,7 +24,7 @@ private val LightColorPalette = lightColors(
     secondary = White,
     onSurface = Teal400,
     onBackground = White
-
+)
     /* Other default colors to override
     background = Color.White,
     surface = Color.White,
@@ -33,7 +33,7 @@ private val LightColorPalette = lightColors(
     onBackground = Color.Black,
     onSurface = Color.Black,
     */
-)
+
 
 @Composable
 fun QuizGameTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
