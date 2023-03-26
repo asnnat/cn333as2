@@ -44,3 +44,7 @@ or
 2. In the **Welcome to Android Studio** window, click **Open**
 3. Select the project folder
 4. Click the **Run button** to build and run the app
+
+## Preview
+
+[![preview clip](https://img.youtube.com/watch?v=He2CsySSwd0/0.jpg)](https://www.youtube.com/watch?v=He2CsySSwd0)
