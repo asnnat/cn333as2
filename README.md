@@ -47,4 +47,4 @@ or
 
 ## Preview
 
-[![preview clip](https://img.youtube.com/watch?v=He2CsySSwd0/0.jpg)](https://www.youtube.com/watch?v=He2CsySSwd0)
+[Preview clip](https://www.youtube.com/watch?v=He2CsySSwd0)
