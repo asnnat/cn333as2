@@ -1,11 +1,12 @@
 package com.example.quizgame.ui
 
 import android.app.Activity
-import androidx.compose.foundation.interaction.MutableInteractionSource
+//import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -14,12 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+//import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quizgame.data.allAnswers
 import com.example.quizgame.ui.theme.QuizGameTheme
+import com.example.quizgame.ui.theme.Shapes
 
 @Composable
 fun GameScreen(
@@ -53,11 +57,17 @@ fun GameScreen(
         ) {
             OutlinedButton(
                 onClick = { gameViewModel.skipQuestion() },
+                shape = Shapes.medium,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 8.dp)
+                    .padding(end = 80.dp)
+                    .padding(start = 80.dp)
             ) {
-                Text(text = "Skip")
+                Text(
+                    text = "Skip",
+                    fontFamily = FontFamily.Monospace,
+                    color = MaterialTheme.colors.secondary,
+                )
             }
         }
 
@@ -80,14 +90,20 @@ fun GameStatus(questionCount: Int, score: Int, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "$questionCount / 10",
+            color = MaterialTheme.colors.primaryVariant,
+            fontFamily = FontFamily.Monospace,
             fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
         )
         Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.End),
             text = "Score: $score",
+            fontFamily = FontFamily.Monospace,
+            color = MaterialTheme.colors.primaryVariant,
             fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
         )
     }
 }
@@ -95,7 +111,8 @@ fun GameStatus(questionCount: Int, score: Int, modifier: Modifier = Modifier) {
 @Composable
 fun GameLayout(
     currentQuestion: String,
-    currentAnswer:String
+    currentAnswer:String,
+    onKeyboardDone: () -> Unit,
     modifier: Modifier = Modifier,
     gameViewModel: GameViewModel
 ) {
@@ -105,14 +122,20 @@ fun GameLayout(
     ) {
         Text(
             text = currentQuestion,
+            fontFamily = FontFamily.Monospace,
+            color = MaterialTheme.colors.surface,
             fontSize = 45.sp,
+            fontWeight = FontWeight.Bold,
             modifier = modifier.align(Alignment.CenterHorizontally)
         )
 
         Text(
             text = "Which one is the best choice?",
+            fontFamily = FontFamily.Monospace,
             fontSize = 17.sp,
+            color = MaterialTheme.colors.primaryVariant,
             modifier = Modifier.align(Alignment.CenterHorizontally)
+
         )
 
         val radioOptions = ArrayList<String>()
@@ -136,8 +159,9 @@ fun GameLayout(
                         .selectable(
                             selected = (selectedItem == label),
                             onClick = {
-                                gameViewModel.checkUserGuess(label) },
-                            role = Role.RadioButton
+                                gameViewModel.checkUserGuess(label)
+                            },
+                            role = Role.RadioButton,
                         )
                         .padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -146,9 +170,18 @@ fun GameLayout(
                         modifier = Modifier.padding(end = 16.dp),
                         selected = (selectedItem == label),
                         onClick = {
-                            gameViewModel.checkUserGuess(label) }
+                            gameViewModel.checkUserGuess(label) },
+                        colors = RadioButtonDefaults.colors(
+                            selectedColor = MaterialTheme.colors.primary,
+                            unselectedColor = MaterialTheme.colors.onSurface
+                        )
                     )
-                    Text(text = label)
+                    Text(
+                        text = label,
+                        fontFamily = FontFamily.Monospace,
+                        color = MaterialTheme.colors.primaryVariant,
+                        fontWeight = FontWeight.Bold,
+                    )
                 }
             }
         }
@@ -185,18 +218,18 @@ private fun FinalScoreDialog(
     )
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Preview(showBackground = true, backgroundColor = 0xFFA9E2E1)
 @Composable
 fun LightThemePreview() {
-    QuizGameTheme {
+    QuizGameTheme(darkTheme = false) {
         GameScreen()
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0x757575)
+@Preview(showBackground = true, backgroundColor = 0xFF000000)
 @Composable
 fun DarkThemePreview() {
-    QuizGameTheme {
+    QuizGameTheme(darkTheme = true) {
         GameScreen()
     }
 }
