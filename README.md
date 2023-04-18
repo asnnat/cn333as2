@@ -5,7 +5,7 @@
 * 6310682635 - ณัฐณิชา ฟักสังข์ - 6310682635@student.tu.ac.th
 
 ## About Project
-Quiz Game is the 2nd assignment about an Android Application for CN322 Mobile Application Developments.
+Quiz Game is the 2nd assignment about an Android Application for CN333 Mobile Application Developments.
 
 ### Requirements
 
